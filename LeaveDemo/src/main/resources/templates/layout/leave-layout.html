@@ -16,9 +16,9 @@
 <body class="h-100">
 	<nav class="navbar navbar-expand navbar-light d-flex flex-row-reverse" style="background-color: #77AD4D;">
 		<div class="navbar-nav">
-			<a href="#" class="nav-link" sec:authorize="hasRole('Leader')" th:href="@{/leader/employee-list}">社員一覧</a>
-			<a href="#" class="nav-link" sec:authorize="hasRole('Leader')" th:href="@{/leader/leave-manage}">勤怠連絡一覧</a>
-			<a href="#" class="nav-link" id="logout-menu">ログアウト</a>
+			<a class="nav-link" sec:authorize="hasRole('Leader')" th:href="@{/employee/list}">社員一覧</a>
+			<a class="nav-link" sec:authorize="hasRole('Leader')" th:href="@{/leave/leader}">勤怠連絡一覧</a>
+			<a class="nav-link" id="logout-menu" sec:authorize="isAuthenticated">ログアウト</a>
 		</div>
 	</nav>
 	<section layout:fragment="content" class="container h-75">

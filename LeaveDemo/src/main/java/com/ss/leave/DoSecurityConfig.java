@@ -22,7 +22,7 @@ public class DoSecurityConfig extends WebSecurityConfigurerAdapter{
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
-		.antMatchers("/", "login", "/sign-in", "/resources/**").permitAll()
+		.antMatchers("/", "login", "/sign-in", "/home", "/resources/**").permitAll()
 		.antMatchers("/leader/**").hasRole("Leader")
 		.antMatchers("/member/**").hasAnyRole("Member", "Leader")
 		.anyRequest().authenticated()

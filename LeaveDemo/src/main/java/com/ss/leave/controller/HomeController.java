@@ -22,7 +22,7 @@ public class HomeController {
 	public String index(HttpServletRequest req) {
 		return empRepo.findOneByMail(req.getRemoteUser()).map(e -> {
 			req.getSession(true).setAttribute("LoginUser", e);
-			return e.getPosition() == Position.Leader ? "redirect:/leader/leave-manage" : "redirect:/member/leave-apply";
+			return e.getPosition() == Position.Leader ? "redirect:/leave/leader" : "redirect:/leave/member";
 		}).orElseThrow(() -> new UsernameNotFoundException("ユーザー情報が間違っています。"));
 	}
 }

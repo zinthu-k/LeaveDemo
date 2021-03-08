@@ -13,7 +13,7 @@ public class DoWebConfig implements WebMvcConfigurer {
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
 		registry.addViewController("/").setViewName("/sign-in");
-		registry.addViewController("/sign-in/").setViewName("/sign-in");
+		registry.addViewController("/sign-in").setViewName("/sign-in");
 	}
 
 	@Override

@@ -5,7 +5,6 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,7 +17,6 @@ import com.ss.leave.repository.EmployeeDetailRepo;
 import com.ss.leave.repository.LeaveDetailRepo;
 
 @Controller
-@RequestMapping("/leave")
 public class LeaveDetailController {
 	
 	@Autowired
@@ -27,9 +25,14 @@ public class LeaveDetailController {
 	@Autowired
 	private EmployeeDetailRepo empRepo;
 
-	@GetMapping
-	public String index() {
+	@RequestMapping("/leave/leader")
+	public String leaderHome() {
 		return "/leader/leave-manage";
+	}
+	
+	@RequestMapping("/leave/member")
+	public String memberHome() {
+		return "/member/leave-apply";
 	}
 
 	@PostMapping("/apply")
