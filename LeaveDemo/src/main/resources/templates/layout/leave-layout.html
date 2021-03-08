@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+	class="h-100">
+<head>
+<meta charset="UTF-8">
+<title layout:title-pattern="$LAYOUT_TITLE | $CONTENT_TITLE">LeaveSystem</title>
+<link rel="stylesheet" th:href="@{/resources/css/bootstrap.min.css}">
+<link rel="stylesheet" th:href="@{/resources/css/font-awesome.min.css}">
+
+<script th:src=@{/resources/js/jquery.min.js}></script>
+<script th:src=@{/resources/js/popper.min.js}></script>
+<script th:src=@{/resources/js/bootstrap.min.js}></script>
+</head>
+<body class="h-100">
+	<nav class="navbar navbar-expand navbar-light d-flex flex-row-reverse" style="background-color: #77AD4D;">
+		<div class="navbar-nav">
+			<a href="#" class="nav-link" sec:authorize="hasRole('Leader')" th:href="@{/leader/employee-list}">社員一覧</a>
+			<a href="#" class="nav-link" sec:authorize="hasRole('Leader')" th:href="@{/leader/leave-manage}">勤怠連絡一覧</a>
+			<a href="#" class="nav-link" id="logout-menu">ログアウト</a>
+		</div>
+	</nav>
+	<section layout:fragment="content" class="container h-75">
+		<h3>Content</h3>
+	</section>
+	<form action="#" th:action="@{/logout}" method="POST" class="d-none" id="logout-form"></form>
+	<script type="text/javascript">
+		$(() => $('#logout-menu').click(() => $('#logout-form').submit()))
+	</script>
+</body>
+</html>

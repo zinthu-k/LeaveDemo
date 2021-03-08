@@ -1,0 +1,4 @@
+INSERT INTO public.employee(group_no, hire_date, mail, name, password, phone_no, position, address) values 
+('1', '2020/02/02', 'user1@ss.com', 'user1', '$2a$10$mv3UTGe4ATK3A09L0el7qeXAjZ5eHwD2C/B8.QT8kpZIhllgnqBIS', '090-123456789', 1, '東京'),('2', '2020/02/02', 'user2@ss.com', 'user2', '$2a$10$mv3UTGe4ATK3A09L0el7qeXAjZ5eHwD2C/B8.QT8kpZIhllgnqBIS', '090-123456789', 1, '東京'),
+('3', '2020/02/02', 'user3@ss.com', 'user3', '$2a$10$mv3UTGe4ATK3A09L0el7qeXAjZ5eHwD2C/B8.QT8kpZIhllgnqBIS', '090-123456789', 1, '東京'),('4', '2020/02/02', 'user4@ss.com', 'user4', '$2a$10$mv3UTGe4ATK3A09L0el7qeXAjZ5eHwD2C/B8.QT8kpZIhllgnqBIS', '090-123456789', 1, '東京'),
+('5', '2020/02/02', 'user5@ss.com', 'user5', '$2a$10$mv3UTGe4ATK3A09L0el7qeXAjZ5eHwD2C/B8.QT8kpZIhllgnqBIS', '090-123456789', 1, '東京'),('6', '2020/02/02', 'admin@ss.com', 'admin', '$2a$10$Lo85R3ssGmpXqup8i77US.lSgHdv2BM2Or6LwYKtX8wwHiR9EiJlq', '090-123456789', 0, '東京');

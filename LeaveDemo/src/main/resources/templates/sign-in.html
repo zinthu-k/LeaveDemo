@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	class="h-100">
+<head>
+<meta charset="UTF-8">
+<title>Sign In</title>
+<link rel="stylesheet" th:href="@{/resources/css/bootstrap.min.css}">
+<link rel="stylesheet" th:href="@{/resources/css/font-awesome.min.css}">
+
+<script th:src=@{/resources/js/jquery.min.js}></script>
+<script th:src=@{/resources/js/popper.min.js}></script>
+<script th:src=@{/resources/js/bootstrap.min.js}></script>
+</head>
+<body class="h-100">
+	<section layout:fragment="content" class="container d-flex h-75 justify-content-center align-items-center">
+		<div class="card w-50" style="background-color: #A3CE81;">
+			<div class="card-body">
+				<h3 class="card-title">ログイン</h3>
+				<form action="#" th:action="@{/login}" method="post">
+					<div class="form-group">
+						<label for="mail">メール<i class="fa fa-envelope"></i></label>
+						<input name="mail" id="mail" type="text" class="form-control" placeholder="メールを入力してください。">
+					</div>
+					<div class="form-group">
+						<label for="password">パスワード<i class="fa fa-key"></i></label>
+						<input name="password" id="password" type="text" class="form-control" placeholder="パスワードを入力してくだ">
+					</div>
+					<button type="submit" class="btn" style="background-color: #4F8635;">ログイン</button>
+				</form>
+			</div>
+		</div>
+	</section>
+</body>
+</html>
