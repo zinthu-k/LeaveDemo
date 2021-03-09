@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,6 +18,7 @@ import com.ss.leave.repository.EmployeeDetailRepo;
 import com.ss.leave.service.EmployeeDetailService;
 
 @Controller
+@RequestMapping("/employee")
 public class EmployeeDetailController {
 	
 	@Autowired
@@ -29,15 +31,15 @@ public class EmployeeDetailController {
 	private BCryptPasswordEncoder bPswEncoder;
 
 
-	@RequestMapping("/employee/list")
+	@GetMapping("/list")
 	public String index(Model model){
 		List<EmployeeDetail> empList = empRepo.findAll();
 		model.addAttribute("empList", empList);
 
-		return "redirect:/leader/employee-list";
+		return "/leader/employee-list";
 	}
 	
-	@PostMapping("/employee/register")
+	@PostMapping("/register")
 	public String createEmployee(@RequestParam EmployeeDetail emp) {
 		EmployeeDetail employee = new EmployeeDetail();
 		
