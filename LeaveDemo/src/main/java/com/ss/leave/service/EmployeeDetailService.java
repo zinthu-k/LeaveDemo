@@ -3,6 +3,8 @@ package com.ss.leave.service;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -35,7 +37,7 @@ public class EmployeeDetailService implements UserDetailsService {
 		empDetailRepo.save(employee);
 	}
 
-	public EmployeeDetail findOneByName(String name) {
-		return empDetailRepo.findOneByName(name);
+	public Page<EmployeeDetail> findByName(String name, Pageable pageble) {
+		return empDetailRepo.findByNameLike("%"+name+"%", pageble);
 	}
 }

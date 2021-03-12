@@ -6,12 +6,12 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.4.3</version>
+		<version>2.4.1</version>
 		<relativePath />
 	</parent>
 	<groupId>com.ss</groupId>
 	<artifactId>LeaveDemo</artifactId>
-	<version>1.0</version>
+	<version>0.0.1-SNAPSHOT</version>
 	<name>LeaveDemo</name>
 	<description>SpringCRUD</description>
 	<properties>

@@ -21,7 +21,7 @@
 			<a class="nav-link" id="logout-menu" sec:authorize="isAuthenticated">ログアウト</a>
 		</div>
 	</nav>
-	<section layout:fragment="content" class="container h-75">
+	<section layout:fragment="content" class="container">
 		<h3>Content</h3>
 	</section>
 	<form action="#" th:action="@{/logout}" method="POST" class="d-none" id="logout-form"></form>

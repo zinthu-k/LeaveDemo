@@ -16,29 +16,23 @@ import javax.validation.constraints.NotEmpty;
 public class LeaveDetail implements Serializable{
 	/** serialVersionUID **/
 	private static final long serialVersionUID = 6067992868469352830L;
-
 	//勤怠連絡ID
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int leaveId;
-
 	//社員ID
 	@ManyToOne
 	@JoinColumn(name="mail")
 	private EmployeeDetail employee;
-
 	//日付
 	@NotEmpty
 	private String leaveDate;
-	
 	//勤怠連絡
 	@NotEmpty
-	private LeaveType leaveType;
-	
+	private LeaveType leaveType;	
 	//種類
 	@NotEmpty
 	private Type type;
-	
 	//現場連絡
 	private Boolean approvedSiteContact;
 	
