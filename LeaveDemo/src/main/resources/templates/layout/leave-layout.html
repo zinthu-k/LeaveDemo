@@ -8,6 +8,7 @@
 <title layout:title-pattern="$LAYOUT_TITLE | $CONTENT_TITLE">LeaveSystem</title>
 <link rel="stylesheet" th:href="@{/resources/css/bootstrap.min.css}">
 <link rel="stylesheet" th:href="@{/resources/css/font-awesome.min.css}">
+<link rel="stylesheet" th:href="@{/resources/css/leave.css}">
 
 <script th:src=@{/resources/js/jquery.min.js}></script>
 <script th:src=@{/resources/js/popper.min.js}></script>
@@ -18,6 +19,7 @@
 		<div class="navbar-nav">
 			<a class="nav-link" sec:authorize="hasRole('Leader')" th:href="@{/employee/list}">社員一覧</a>
 			<a class="nav-link" sec:authorize="hasRole('Leader')" th:href="@{/leave/leader}">勤怠連絡一覧</a>
+			<a class="nav-link" sec:authorize="hasRole('Member')" th:href="@{/leave/leader}">勤怠連絡一覧</a>
 			<a class="nav-link" id="logout-menu" sec:authorize="isAuthenticated">ログアウト</a>
 		</div>
 	</nav>

@@ -1,6 +1,7 @@
 package com.ss.leave.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "leave_contact")
@@ -26,7 +29,8 @@ public class LeaveDetail implements Serializable{
 	private EmployeeDetail employee;
 	//日付
 	@NotEmpty
-	private String leaveDate;
+	@DateTimeFormat(pattern = "yyyy/MM/dd")
+	private Date leaveDate;
 	//勤怠連絡
 	@NotEmpty
 	private LeaveType leaveType;	
@@ -34,7 +38,12 @@ public class LeaveDetail implements Serializable{
 	@NotEmpty
 	private Type type;
 	//現場連絡
-	private Boolean approvedSiteContact;
+	private Confirm approvedSiteContact;
+	//理由
+	@NotEmpty
+	private String reason;
+	//承認
+	private Confirm approved;
 	
 	public enum Type{
 		有給連, 欠勤連絡, 代休連絡, 休日出勤, シフト出勤, 遅刻, 早退, 現場出勤, テレワーク
@@ -42,6 +51,9 @@ public class LeaveDetail implements Serializable{
 	
 	public enum LeaveType{
 		全休, 午前半休, 午後半休, 全日出勤, 午前出勤, 午後出勤, 離席
+	}
+	public enum Confirm{
+		済み, 未済み
 	}
 
 	public int getLeaveId() {
@@ -52,11 +64,11 @@ public class LeaveDetail implements Serializable{
 		this.leaveId = leaveId;
 	}
 
-	public String getLeaveDate() {
+	public Date getLeaveDate() {
 		return leaveDate;
 	}
 
-	public void setLeaveDate(String leaveDate) {
+	public void setLeaveDate(Date leaveDate) {
 		this.leaveDate = leaveDate;
 	}
 
@@ -76,11 +88,11 @@ public class LeaveDetail implements Serializable{
 		this.leaveType = leaveType;
 	}
 
-	public Boolean getApprovedSiteContact() {
+	public Confirm getApprovedSiteContact() {
 		return approvedSiteContact;
 	}
 
-	public void setApprovedSiteContact(Boolean approvedSiteContact) {
+	public void setApprovedSiteContact(Confirm approvedSiteContact) {
 		this.approvedSiteContact = approvedSiteContact;
 	}
 
@@ -92,25 +104,24 @@ public class LeaveDetail implements Serializable{
 		this.employee = optional;
 	}
 
+	public String getReason() {
+		return reason;
+	}
+
+	public void setReason(String reason) {
+		this.reason = reason;
+	}
+
+	public Confirm getApproved() {
+		return approved;
+	}
+
+	public void setApproved(Confirm approved) {
+		this.approved = approved;
+	}
+
 	public LeaveDetail() {
 		super();
-	}
-
-	public LeaveDetail(String leaveDate, LeaveType leaveType, Type type,
-			Boolean approvedSiteContact) {
-		this.leaveDate = leaveDate;
-		this.leaveType = leaveType;
-		this.type = type;
-		this.approvedSiteContact = approvedSiteContact;
-	}
-
-	public LeaveDetail(EmployeeDetail employee, String leaveDate, LeaveType leaveType, Type type,
-			Boolean approvedSiteContact) {
-		this.employee = employee;
-		this.leaveDate = leaveDate;
-		this.leaveType = leaveType;
-		this.type = type;
-		this.approvedSiteContact = approvedSiteContact;
 	}
 
 	@Override
@@ -118,4 +129,28 @@ public class LeaveDetail implements Serializable{
 		return "LeaveDetail [leaveId=" + leaveId + ",  leaveDate=" + leaveDate
 				+ ", leaveType=" + leaveType + ", type=" + type + ", approvedSiteContact=" + approvedSiteContact + "]";
 	}
+
+	public LeaveDetail(@NotEmpty Date leaveDate, @NotEmpty LeaveType leaveType, @NotEmpty Type type,
+			Confirm approvedSiteContact, @NotEmpty String reason, Confirm approved) {
+		super();
+		this.leaveDate = leaveDate;
+		this.leaveType = leaveType;
+		this.type = type;
+		this.approvedSiteContact = approvedSiteContact;
+		this.reason = reason;
+		this.approved = approved;
+	}
+
+	public LeaveDetail(EmployeeDetail employee, @NotEmpty Date leaveDate, @NotEmpty LeaveType leaveType,
+			@NotEmpty Type type, Confirm approvedSiteContact, @NotEmpty String reason, Confirm approved) {
+		super();
+		this.employee = employee;
+		this.leaveDate = leaveDate;
+		this.leaveType = leaveType;
+		this.type = type;
+		this.approvedSiteContact = approvedSiteContact;
+		this.reason = reason;
+		this.approved = approved;
+	}
+
 }

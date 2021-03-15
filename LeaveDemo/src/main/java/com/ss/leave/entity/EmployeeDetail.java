@@ -51,13 +51,17 @@ public class EmployeeDetail implements Serializable{
     private String address;
 
 	//グループ
-	private String groupNo;
+	private Groups groupNo;
 	
 	//位置
 	private Position position;
     
     public enum Position {
     	Leader,  Member
+    }
+    
+    public enum Groups{
+    	グルプ１,グルプ２,グルプ3,グルプ4,ルプ5
     }
     
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
@@ -71,11 +75,11 @@ public class EmployeeDetail implements Serializable{
 		this.name = name;
 	}
 
-	public String getGroupNo() {
+	public Groups getGroupNo() {
 		return groupNo;
 	}
 
-	public void setGroupNo(String groupNo) {
+	public void setGroupNo(Groups groupNo) {
 		this.groupNo = groupNo;
 	}
 
@@ -132,7 +136,7 @@ public class EmployeeDetail implements Serializable{
 	}
 
 	public EmployeeDetail(String mail, String name, String password,
-			String phoneNo, Date hireDate, String address, String groupNo, Position position) {
+			String phoneNo, Date hireDate, String address, Groups groupNo, Position position) {
 		this.mail = mail;
 		this.name = name;
 		this.password = password;
@@ -146,7 +150,7 @@ public class EmployeeDetail implements Serializable{
 	public EmployeeDetail(@Email(message = "メールアドレス") @Size(max = 100) @NotEmpty String mail,
 			@NotEmpty @Size(max = 100) String name, @NotEmpty String password,
 			@Pattern(regexp = "^\\+?[0-9. ()-]{7,25}$", message = "Phone number") @Size(max = 25) String phoneNo,
-			Date hireDate, String address, String groupNo, Position position, List<LeaveDetail> leaveDetail) {
+			Date hireDate, String address, Groups groupNo, Position position, List<LeaveDetail> leaveDetail) {
 		this.mail = mail;
 		this.name = name;
 		this.password = password;

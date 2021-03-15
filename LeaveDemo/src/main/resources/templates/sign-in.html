@@ -7,6 +7,7 @@
 <title>Sign In</title>
 <link rel="stylesheet" th:href="@{/resources/css/bootstrap.min.css}">
 <link rel="stylesheet" th:href="@{/resources/css/font-awesome.min.css}">
+<link rel="stylesheet" th:href="@{/resources/css/leave.css}">
 
 <script th:src=@{/resources/js/jquery.min.js}></script>
 <script th:src=@{/resources/js/popper.min.js}></script>
@@ -14,7 +15,7 @@
 </head>
 <body class="h-100">
 	<section layout:fragment="content" class="container d-flex h-75 justify-content-center align-items-center">
-		<div class="card w-50" style="background-color: #A3CE81;">
+		<div class="card w-50">
 			<div class="card-body">
 				<h3 class="card-title">ログイン</h3>
 				<form action="#" th:action="@{/login}" method="post">
@@ -26,7 +27,7 @@
 						<label for="password">パスワード<i class="fa fa-key"></i></label>
 						<input name="password" id="password" type="text" class="form-control" placeholder="パスワードを入力してくだ">
 					</div>
-					<button type="submit" class="btn" style="background-color: #4F8635;">ログイン</button>
+					<button type="submit" class="btn ml">ログイン</button>
 				</form>
 			</div>
 		</div>

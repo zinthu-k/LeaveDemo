@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ss.leave.entity.EmployeeDetail;
+import com.ss.leave.entity.EmployeeDetail.Groups;
 import com.ss.leave.entity.EmployeeDetail.Position;
 import com.ss.leave.service.EmployeeDetailService;
 
@@ -56,7 +57,7 @@ public class EmployeeDetailController {
 
 	@PostMapping("/register")
 	public String registerForm(@RequestParam String mail, @RequestParam String name, @RequestParam String password, @RequestParam String phoneNo,
-			@RequestParam Date hireDate, @RequestParam String address, @RequestParam String groupNo) {
+			@RequestParam Date hireDate, @RequestParam String address, @RequestParam Groups groupNo) {
 		EmployeeDetail employee = new EmployeeDetail();
 
 		employee.setMail(mail);
@@ -69,6 +70,7 @@ public class EmployeeDetailController {
 		employee.setPosition(Position.Member);
 
 		empService.saveEmployee(employee);
+
 		return "redirect:/employee/list";
 	}
 

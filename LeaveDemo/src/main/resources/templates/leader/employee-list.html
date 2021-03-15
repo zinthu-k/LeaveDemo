@@ -5,27 +5,19 @@
 <head>
 <meta charset="UTF-8">
 <title>Employee List</title>
-<link rel="stylesheet" th:href="@{/resources/css/bootstrap.min.css}">
-<link rel="stylesheet" th:href="@{/resources/css/font-awesome.min.css}">
-
-<script th:src=@{/resources/js/jquery.min.js}></script>
-<script th:src=@{/resources/js/popper.min.js}></script>
-<script th:src=@{/resources/js/bootstrap.min.js}></script>
 </head>
 <body class="h-100">
 	<section layout:fragment="content"
-		class="container d-flex h-100 justify-content-center align-items-center">
-		<div class="card-center" style="background-color: #A3CE81;">
+		class="container d-flex h-100 justify-content-center align-item-center pt-5">
+		<div class="card h-90">
 			<div class="card-body">
-				<form class="from-inline my-2 my-lg-0" th:action="@{/employee/list}" action="#">
-					<div class="d-flex justify-content-between">
-						<button type="button" class="btn-brand my-sm-0 "
-							style="background-color: #4F8635;" data-toggle="modal"
+				<form class="from-inline my-2 my-lg-0" th:action="@{/employee/list}"
+					action="#">
+					<div class="d-flex">
+						<button type="button" class="p-2 mr-auto" data-toggle="modal"
 							data-target="#registerModal">社員情報登録</button>
-						<label class="col-2 mr-sm">名前:</label> <input type="search"
-							name="name" class="form-control mr-sm-2 col-2">
-						<button type="submit" class="btn col-2"
-							style="background-color: #A3CE81;">検索</button>
+						<input type="search" name="name" class="p-2" placeholder="名前" />
+						<button type="submit" class="p-1">検索</button>
 					</div>
 					<div class="table-responsive"
 						th:if="${empList != null && !empList.isEmpty()}">
@@ -41,7 +33,6 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr class="table-success">
 								<tr th:each="empInfo:${empList}">
 									<td th:text="${empInfo.mail}"></td>
 									<td th:text="${empInfo.name}"></td>
@@ -59,10 +50,11 @@
 							<div class="col-md-8">
 								<nav aria-label="Pagination">
 									<ul class="pagination justify-content-center">
-										<li class="page-item btn-group mr-2" th:each="pageNumber : ${pageNumbers}">
-											<a class="page-link" th:href="@{'/employee/page/' + ${pageNumber}}" th:text=${pageNumber}>
-											</a>
-										</li>
+										<li class="page-item btn-group mr-2"
+											th:each="pageNumber : ${pageNumbers}"><a
+											class="page-link"
+											th:href="@{'/employee/page/' + ${pageNumber}}"
+											th:text=${pageNumber}> </a></li>
 									</ul>
 								</nav>
 							</div>
@@ -76,7 +68,7 @@
 		<div class="modal fade" id="registerModal">
 			<div class="card-body">
 				<div class="modal-dialog modal-dialog-centered">
-					<div class="modal-content" style="background-color: #A3CE81;">
+					<div class="modal-content">
 						<!-- Modal Header -->
 						<div class="modal-header">
 							<h4 class="modal-title card-title">新入社員登録</h4>
@@ -106,7 +98,7 @@
 								</div>
 								<div class="form-group row">
 									<label for="hireDate" class="col-3"> 入社日 :</label> <input
-										name="hireDate" id="hireDate" type="text"
+										name="hireDate" id="hireDate" type="date"
 										class="form-control col" />
 								</div>
 								<div class="form-group row">
@@ -117,17 +109,14 @@
 								<div class="form-group row">
 									<label for="groupNo" class="col-3"> グループ :</label> <select
 										name="groupNo" id="groupNo" class="form-control col">
-										<option selected="selected">グループを洗濯ください。</option>
-										<option value="1">グループ1</option>
-										<option value="2">グループ2</option>
-										<option value="3">グループ3</option>
-										<option value="4">グループ4</option>
-										<option value="5">グループ5</option>
+										<option
+											th:each="groupno : ${T(com.ss.leave.entity.EmployeeDetail.Groups).values()}"
+											th:value="${groupno}" th:text="${groupno}"
+											selected="selected"></option>
 									</select>
 								</div>
 								<div class="form-group row">
-									<button type="submit" class="btn"
-										style="background-color: #4F8635;">登録</button>
+									<button type="submit" class="btn">登録</button>
 								</div>
 							</form>
 						</div>
@@ -136,5 +125,12 @@
 			</div>
 		</div>
 	</section>
+	<script type="text/javascript">
+		$(function() {
+			$('#date').datepicker({
+				format : 'yyyy/MM/dd'
+			});
+		});
+	</script>
 </body>
 </html>
