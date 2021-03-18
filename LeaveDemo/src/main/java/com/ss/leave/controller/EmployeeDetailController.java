@@ -1,7 +1,10 @@
 package com.ss.leave.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -40,7 +43,7 @@ public class EmployeeDetailController {
 	@GetMapping("/page/{page}")
 	public ModelAndView paginatedEmployee(@RequestParam(defaultValue="") String name, @PathVariable("page") int page) {
 		ModelAndView modelAndView = new ModelAndView("/leader/employee-list");
-		Pageable sortedByNameDesc = PageRequest.of(page - 1, 10, Sort.by("name").descending());
+		Pageable sortedByNameDesc = PageRequest.of(page - 1, 8, Sort.by("name").descending());
 		Page<EmployeeDetail> empPage = empService.findByName(name,sortedByNameDesc);
 		
 		int totalPages = empPage.getTotalPages();
@@ -57,14 +60,23 @@ public class EmployeeDetailController {
 
 	@PostMapping("/register")
 	public String registerForm(@RequestParam String mail, @RequestParam String name, @RequestParam String password, @RequestParam String phoneNo,
-			@RequestParam Date hireDate, @RequestParam String address, @RequestParam Groups groupNo) {
+			@RequestParam String hireDate, @RequestParam String address, @RequestParam Groups groupNo) {
 		EmployeeDetail employee = new EmployeeDetail();
 
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd",Locale.ENGLISH);
+
+		Date requestDate = null;
+		try {
+			requestDate = dateFormat.parse(hireDate);
+		} catch (ParseException e1) {
+			e1.printStackTrace();
+		}
+		
 		employee.setMail(mail);
 		employee.setName(name);
 		employee.setPassword(password);
 		employee.setPhoneNo(phoneNo);
-		employee.setHireDate(hireDate);
+		employee.setHireDate(requestDate);
 		employee.setAddress(address);
 		employee.setGroupNo(groupNo);
 		employee.setPosition(Position.Member);

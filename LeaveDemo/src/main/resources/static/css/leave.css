@@ -10,6 +10,11 @@ body {
 	opacity: 0.7;
 }
 
+
+section{
+	width: 100%;
+}
+
 .card {
 	background-color: #A3CE81;
 	width: 100%;

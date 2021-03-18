@@ -29,7 +29,7 @@ public class LeaveDetail implements Serializable{
 	private EmployeeDetail employee;
 	//日付
 	@NotEmpty
-	@DateTimeFormat(pattern = "yyyy/MM/dd")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date leaveDate;
 	//勤怠連絡
 	@NotEmpty

@@ -19,7 +19,6 @@
 		<div class="navbar-nav">
 			<a class="nav-link" sec:authorize="hasRole('Leader')" th:href="@{/employee/list}">社員一覧</a>
 			<a class="nav-link" sec:authorize="hasRole('Leader')" th:href="@{/leave/leader}">勤怠連絡一覧</a>
-			<a class="nav-link" sec:authorize="hasRole('Member')" th:href="@{/leave/leader}">勤怠連絡一覧</a>
 			<a class="nav-link" id="logout-menu" sec:authorize="isAuthenticated">ログアウト</a>
 		</div>
 	</nav>

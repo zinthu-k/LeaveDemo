@@ -8,7 +8,7 @@
 </head>
 <body class="h-100">
 	<section layout:fragment="content"
-		class="container d-flex h-100 justify-content-center align-items-center pt-5">
+		class="container d-flex justify-content-center align-items-center p-5">
 		<div class="card h-90 w-90">
 			<div class="card-body">
 				<form class="from-inline my-2 my-lg-0" th:action="@{/leave/leader}"
@@ -27,7 +27,7 @@
 						</label>
 						<button type="submit">検索</button>
 					</div>
-					<div class="table-responsive"
+					<div class="table-responsive fixed-table-body"
 						th:if="${leaveList != null && !leaveList.isEmpty()}">
 						<table class="table table-hover">
 							<thead>
@@ -61,7 +61,7 @@
 									<ul class="pagination justify-content-center">
 										<li class="page-item btn-group mr-2"
 											th:each="pageNumber : ${pageNumbers}"><a
-											class="page-link" th:href="@{'/allLeaves/' + ${pageNumber}}"
+											class="page-link" th:href="@{'/leave/allLeaves/' + ${pageNumber}}"
 											th:text=${pageNumber}> </a></li>
 									</ul>
 								</nav>

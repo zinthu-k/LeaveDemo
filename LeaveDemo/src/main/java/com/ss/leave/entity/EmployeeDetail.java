@@ -16,6 +16,8 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity
 @Table(name = "employee")
 public class EmployeeDetail implements Serializable{
@@ -45,15 +47,20 @@ public class EmployeeDetail implements Serializable{
     private String phoneNo;
     
     //入社日
+    @NotEmpty
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date hireDate;
     
     //住所
+    @NotEmpty
     private String address;
 
 	//グループ
+    @NotEmpty
 	private Groups groupNo;
 	
 	//位置
+    @NotEmpty
 	private Position position;
     
     public enum Position {
@@ -61,7 +68,7 @@ public class EmployeeDetail implements Serializable{
     }
     
     public enum Groups{
-    	グルプ１,グルプ２,グルプ3,グルプ4,ルプ5
+    	グルプ１,グルプ２,グルプ3,グルプ4,グルプ5
     }
     
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)

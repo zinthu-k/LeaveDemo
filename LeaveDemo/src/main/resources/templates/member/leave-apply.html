@@ -8,10 +8,10 @@
 </head>
 <body class="h-100">
 	<section layout:fragment="content"
-		class="container d-flex h-100 justify-content-center align-items-center pt-5">
-		<div class="card h-90">
+		class="container d-flex justify-content-center align-item-center p-5">
+		<div class="card">
 			<div class="card-body">
-				<form class="from-inline my-2 my-lg-0" th:action="@{/leave/member}"
+				<form class="my-2 my-lg-0" th:action="@{/leave/member}"
 					action="#">
 					<div class="d-flex">
 						<label>連絡日付: <input type="date" class="p-2 date mr-auto"
@@ -58,13 +58,14 @@
 							</tbody>
 						</table>
 						<div class="btn-toolbar" th:fragment="pagination" role="toolbar">
+							<div class="col-md-2"></div>
 							<div class="col-md-8">
 								<nav aria-label="Pagination">
 									<ul class="pagination justify-content-center">
 										<li class="page-item btn-group mr-2"
 											th:each="pageNumber : ${pageNumbers}"><a
 											class="page-link"
-											th:href="@{'/myLeavePage/' + ${pageNumber}}"
+											th:href="@{'/leave/myLeavePage/' + ${pageNumber}}"
 											th:text=${pageNumber}> </a></li>
 									</ul>
 								</nav>
@@ -88,6 +89,11 @@
 						<div class="modal-body">
 							<form method="post" th:action="@{/leave/apply}" action="#">
 								<div class="form-group row">
+									<label for="leaveDate" class="col-3"> 日付 : </label> <input
+										type="date" class="p-2 date mr-auto" name="leaveDate"
+										id='leaveDate' autocomplete="off" />
+								</div>
+								<div class="form-group row">
 									<label for="leaveType" class="col-3">勤怠連絡 : </label> <select
 										name="leaveType" id="leaveType" class="form-control col">
 										<option
@@ -95,11 +101,6 @@
 											th:value="${leavetype}" th:text="${leavetype}"
 											selected="selected"></option>
 									</select>
-								</div>
-								<div class="form-group row">
-									<label for="leaveDate" class="col-3"> 日付 : </label> <input
-										type="date" class="p-2 date mr-auto" name="leaveDate"
-										id='leaveDate' autocomplete="off" />
 								</div>
 								<div class="form-group row">
 									<label for="type" class="col-3"> 種類 :</label><select
@@ -115,10 +116,12 @@
 										rows="3"></textarea>
 								</div>
 								<div class="form-group row">
-									<label for="approvedSiteContact" class="col-3"> 現場連絡 :
-										<input name="approvedSiteContact" type="checkbox" value=""
-										checked="checked">
-									</label>
+									<label for="approvedSiteContact" class="col-3"> 現場連絡 :</label>
+									<select name="approvedSiteContact" id="approvedSiteContact" class="form-control col">
+										<option
+											th:each="approvedSiteContact : ${T(com.ss.leave.entity.LeaveDetail.Confirm).values()}"
+											th:value="${approvedSiteContact}" th:text="${approvedSiteContact}" selected="selected"></option>
+									</select>
 								</div>
 								<div class="form-group row">
 									<button type="submit" class="btn col-2 mr-auto">申込む</button>
@@ -139,7 +142,8 @@
 		th:src="@{/assets/tempusdominus-bootstrap-4/tempusdominus-bootstrap-4.min.js}"></script>
 	<script>
 		$('#leaveDate').datetimepicker({
-			format : 'YYYY/MM/DD'
+			format : 'YYYY-MM-DD',
+			close : "閉じる"
 		});
 	</script>
 </body>

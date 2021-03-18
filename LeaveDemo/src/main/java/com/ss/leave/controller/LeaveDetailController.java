@@ -1,7 +1,10 @@
 package com.ss.leave.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -12,7 +15,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,6 +26,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.ss.leave.entity.EmployeeDetail;
 import com.ss.leave.entity.LeaveDetail;
+import com.ss.leave.entity.LeaveDetail.Confirm;
 import com.ss.leave.entity.LeaveDetail.LeaveType;
 import com.ss.leave.entity.LeaveDetail.Type;
 import com.ss.leave.repository.EmployeeDetailRepo;
@@ -41,7 +44,7 @@ public class LeaveDetailController {
 	private EmployeeDetailRepo empRepo;
 
 	@Autowired
-	private LeaveDetailService leaveServicfe;
+	private LeaveDetailService leaveService;
 
 	@GetMapping("/leader")
 	public ModelAndView leaderHome() {
@@ -59,8 +62,8 @@ public class LeaveDetailController {
 		EmployeeDetail emp = empRepo.findOneByMail(req.getRemoteUser()).map(e -> {
 			return e;
 		}).orElseThrow(() -> new UsernameNotFoundException("ユーザー情報が間違っています。"));
-		Pageable sortedByDateAsc = PageRequest.of(page - 1, 10, Sort.by("leaveDate").ascending());
-		Page<LeaveDetail> leavePage = leaveServicfe.findByEmployee(emp, sortedByDateAsc);
+		Pageable sortedByDateAsc = PageRequest.of(page - 1, 8, Sort.by("leaveDate").ascending());
+		Page<LeaveDetail> leavePage = leaveService.findByEmployee(emp, sortedByDateAsc);
 
 		int totalPages = leavePage.getTotalPages();
 
@@ -73,12 +76,12 @@ public class LeaveDetailController {
 
 		return modelAndView;
 	}
-	
+
 	@GetMapping("/allLeaves/{page}")
 	public ModelAndView allPaginatedLeaves(@PathVariable("page") int page) {
 		ModelAndView modelAndView = new ModelAndView("/leader/leave-manage");
-		Pageable sortedByDateAsc = PageRequest.of(page - 1, 10, Sort.by("leaveDate").ascending());
-		Page<LeaveDetail> leavePage = leaveServicfe.findByAll(sortedByDateAsc);
+		Pageable sortedByDateAsc = PageRequest.of(page - 1, 8, Sort.by("leaveDate").ascending());
+		Page<LeaveDetail> leavePage = leaveService.findByAll(sortedByDateAsc);
 
 		int totalPages = leavePage.getTotalPages();
 
@@ -93,17 +96,27 @@ public class LeaveDetailController {
 	}
 
 	@PostMapping("/apply")
-	public String applyLeave(HttpServletRequest req, @RequestParam("leaveDate") @DateTimeFormat(pattern = "yyyy/MM/dd") Date leaveDate, @RequestParam Type type,
-			LeaveType leaveType) {
-
+	public String applyLeave(HttpServletRequest req, @RequestParam String leaveDate, @RequestParam Type type,
+			LeaveType leaveType, @RequestParam Confirm approvedSiteContact, @RequestParam String reason){
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd",Locale.ENGLISH);
 		LeaveDetail leave = new LeaveDetail();
-		leave.setLeaveDate(leaveDate);
-		leave.setType(type);
-		leave.setLeaveType(leaveType);
+		Date requestDate = null;
+		try {
+			requestDate = dateFormat.parse(leaveDate);
+		} catch (ParseException e1) {
+			e1.printStackTrace();
+		}
 		EmployeeDetail emp = empRepo.findOneByMail(req.getRemoteUser()).map(e -> {
 			return e;
 		}).orElseThrow(() -> new UsernameNotFoundException("ユーザー情報が間違っています。"));
 		leave.setEmployee(emp);
+		leave.setLeaveDate(requestDate);
+		System.out.println("Formatted : "+requestDate);
+		leave.setLeaveType(leaveType);
+		leave.setType(type);
+		leave.setApprovedSiteContact(approvedSiteContact);
+		leave.setReason(reason);
+		leave.setApproved(Confirm.未済み);
 
 		leaveRepo.save(leave);
 

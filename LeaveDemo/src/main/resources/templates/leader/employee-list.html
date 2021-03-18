@@ -8,10 +8,10 @@
 </head>
 <body class="h-100">
 	<section layout:fragment="content"
-		class="container d-flex h-100 justify-content-center align-item-center pt-5">
-		<div class="card h-90">
+		class="container d-flex justify-content-center align-item-center p-5">
+		<div class="card">
 			<div class="card-body">
-				<form class="from-inline my-2 my-lg-0" th:action="@{/employee/list}"
+				<form class="my-2 my-lg-0" th:action="@{/employee/list}"
 					action="#">
 					<div class="d-flex">
 						<button type="button" class="p-2 mr-auto" data-toggle="modal"
@@ -58,7 +58,6 @@
 									</ul>
 								</nav>
 							</div>
-							<div class="col-md-2"></div>
 						</div>
 					</div>
 				</form>
@@ -128,7 +127,7 @@
 	<script type="text/javascript">
 		$(function() {
 			$('#date').datepicker({
-				format : 'yyyy/MM/dd'
+				format : 'yyyy-MM-dd'
 			});
 		});
 	</script>
